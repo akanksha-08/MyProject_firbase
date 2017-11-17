@@ -1,0 +1,23 @@
+<div *ngIf="authService.user | async">
+  <h2> Welcome {{ (authService.user | async)?.email }}!</h2>
+</div>   
+   <h1> LOGIN PAGE.........</h1>
+    <input type="text" [(ngModel)]="email" placeholder="email" required [(ngModel)] = "email">
+    <input type="text" [(ngModel)]="displayName" placeholder="uname">
+    <input type="password" [(ngModel)]="password" placeholder="password">
+  
+    <button (click)="signup()" [disabled]="!email || !displayName  || !password" >
+      Signup
+    </button>
+    <button (click)="login()" [disabled]="!email || !password ">
+      Login
+    </button>
+    
+    <button (click)="logout()" *ngIf="authService.user | async">
+      Logout
+    </button>
+
+<button   (click)="sendResetEmail()" [disabled]="!email ||!logout">
+      Reset Password
+    </button>
+    <p *ngIf="resetPassword" class="text-success">Check your email to reset password!</p>
